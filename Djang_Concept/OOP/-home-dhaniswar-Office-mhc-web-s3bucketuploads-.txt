@@ -1,0 +1,63 @@
+from urllib.parse import urlparse
+import re
+
+
+
+url = "https://www.example.com/path/to/resource"
+url3 = "file:///data/user/0/com.awareable.myhairscope.dev/files/4lYTCKiPBCQsgUTLsBd0zE2SHpE2/daily-image/2022-12-07/back.jpg"
+url2 = "abcdefghijklmnopqrstuvwxyz"
+# print(url)
+# parts = url.split("/")
+# print(parts)
+# print(parts)
+
+
+# half1 = parts[:len(parts)//2]
+# result1 = "/".join(half1)
+# print(result1)
+
+
+# half2 = parts[len(parts)//2:]
+# result2 = "/".join(half2)
+# print(result2)
+
+# half3 = parts[-3:]
+# result3 = "/".join(half3)
+# print(result3)
+
+# u1 = urlparse(url)
+# u2 = urlparse(url2)
+
+# result = u1
+# print(result)
+# print(result.path)
+
+
+
+
+
+u3 = urlparse(url3)
+result = u3
+print(result)
+print(result[0])
+print(result.scheme)
+print(result.path)
+
+if result.scheme == "file" and "/" in result.path:
+    print("Yes")
+
+
+
+url11 = "https://www.example.com/products/[product_id]"
+pattern = "https://www.example.com/products/[\w]+"
+
+if re.match(pattern, url11):
+    print("The URL pattern matches the expected pattern.")
+else:
+    print("The URL pattern does not match the expected pattern.")
+
+
+
+
+# url_pattern = "^[-a-zA-Z0-9@:%._\\+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b(?:[-a-zA-Z0-9()@:%_\\+.~#?&\\/=]*)$"
+# print(re.match(url_pattern, 'file:///data/user/0/com.awareable.myhairscope.dev'))
