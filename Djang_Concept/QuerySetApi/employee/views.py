@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status
+from django.http import Http404
 from drf_yasg.utils import swagger_auto_schema
 
 
@@ -32,28 +33,33 @@ class EmployeeDetailsAPIViewSet(APIView):
         try:
             return Employee.objects.get(pk=pk)
         except Employee.DoesNotExist:
-            raise status.HTTP_404_NOT_FOUND
+            raise Http404
         
    
     def get(self, request, pk):
-        employee = self.get_object(self, request, pk)
+        employee = self.get_object(pk)
         serializer = EmployeeSerializer(employee, many=False)
-        Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     @swagger_auto_schema(request_body=EmployeeSerializer)
     def put(self, request, pk):
-        employee = self.get_object(self, pk)
-        serializer = EmployeeSerializer(employee ,data=request.data)
+        employee = self.get_object(pk)
+        serializer = EmployeeSerializer(employee, data=request.data)
+
         if serializer.is_valid():
             serializer.save()
-            Response(serializer.data, status=status.HTTP_200_OK)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     
     def delete(self, request, pk):
-        employee = self.get_object(self, pk)
+        employee = self.get_object(pk)
         employee.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        message = {
+            "details": "Deleted successfully"
+        }
+        return Response(message, status=status.HTTP_204_NO_CONTENT)
     
 
 
