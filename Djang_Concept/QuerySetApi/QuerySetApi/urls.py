@@ -25,9 +25,10 @@ schema_view = get_schema_view(
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("school.urls")),
-    path('api/employee/', include('employee.urls')),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('making-queries/api/rest/', include("making_queries.urls")),
+    path('employee/api/rest/', include('employee.urls')),
+    path('token/api/access/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('token/api/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/docs/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     
 ]
