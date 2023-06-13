@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'drf_yasg',
     'school',
     'employee',
-    'making_queries'
+    'making_queries',
+    'django_models',
 ]
 
 MIDDLEWARE = [
