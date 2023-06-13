@@ -46,8 +46,14 @@ class BlogAPIViewDetails(APIView):
         If error is Models object is not iterable then make sure serializers arguments many=False
         """
         # queryset = Blog.objects.filter(name__iexact="Drinking Water") # iexact lookup display matching all it is not case sensitive
+        
+        # queryset_id = Blog.objects.values_list('id', flat=True)[1::2] # displaying only even id
+        # print("************ queryset_id : ", queryset_id)
 
-        queryset = Blog.objects.filter(name__contains="water")
+      
+
+
+        queryset = Blog.objects.all()
 
 
         serializer = BlogSerializer(queryset, many= True)
@@ -65,6 +71,6 @@ class EntryAPIViewDetails(APIView):
     def get(self, request):
         # queryset = Entry.objects.filter(headline__startswith="What").exclude(pub_date__gte=datetime.datetime.today()).filter(pub_date__gte=datetime.date(2023, 6, 7))
         # queryset = Entry.objects.filter(headline__startswith="What")
-        queryset = Entry.objects.filter(blog__name="drinking water")
+        queryset = Entry.objects.all()
         serializer = EntrySerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
