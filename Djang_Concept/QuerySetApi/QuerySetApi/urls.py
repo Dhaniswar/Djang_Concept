@@ -26,6 +26,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("school.urls")),
     path('making-queries/api/rest/', include("making_queries.urls")),
+    path('authentication/api/rest/', include("authentication.urls")),
+
    #  path('django-models/rest/api', include("django_models.urls")),
     path('employee/api/rest/', include('employee.urls')),
     path('token/api/access/', TokenObtainPairView.as_view(), name='token_obtain_pair'),

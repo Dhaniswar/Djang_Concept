@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'employee',
     'making_queries',
     'django_models',
+    'authentication',
 ]
 
 MIDDLEWARE = [
