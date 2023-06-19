@@ -1,9 +1,9 @@
-from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 from django.contrib.auth.models import Permission
 
-class CreateUserSerializer(ModelSerializer):
+class CreateUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
@@ -34,3 +34,8 @@ class CreateUserSerializer(ModelSerializer):
             user.user_permissions.add(permission)
         
         return user
+    
+
+class LoggedInUserSerializer(serializers.Serializer):
+    username = serializers.CharField(required=True)
+    password = serializers.CharField(required=True)
