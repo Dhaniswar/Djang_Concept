@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'making_queries',
     'django_models',
     'authentication',
+    'password_management'
 ]
 
 MIDDLEWARE = [
